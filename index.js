@@ -1,50 +1,72 @@
 class ProductManager {
-  tittle;
-  description;
-  price;
-  thumbnail;
-  code;
-  stock;
-  static id = 0;
-  static products = []
+  products;
+  static id = 1;
   constructor(tittle, description, price, thumbnail, code, stock) {
-    ProductManager.id += 1;
+    ProductManager.id += 0;
     this.products = [];
-    this.tittle = tittle,
-    this.description = description,
-    this.price = price,
-    this.thumbnail = thumbnail,
-    this.code = code,
-    this.stock = stock
-  }
-  addProduct(product) {
-    let assignedCode = this.products.find((product) => product.code === code);
-    if (assignedCode) {
-      return console.log('This code has already been assigned');
-    } else {
-    this.products.push(product);
-  }
-  }
-  
-  getProducts() {
-   return this.products;
+    this.tittle = tittle;
+    this.description = description;
+    this.price = price;
+    this.thumbnail = thumbnail;
+    this.code = code;
+    this.stock = stock;
   }
 
-  getProductById(index) {
-    console.log("El id del producto es:", find(index, 1).products);
+  addProduct(product) {
+    product = { ...product, id: ProductManager.id };
+    let assignedCode = this.products.find(
+      (product) => product.code === this.code
+    );
+    if (assignedCode) {
+      return console.log("El producto ya existe");
+    } else {
+      this.products.push(product);
+      ProductManager.id++;
+    }
+  }
+
+  getProducts() {
+    return this.products;
+  }
+
+  getProductById(id) {
+    let searchID = id;
+    let myProduct = null;
+    this.products.forEach((product) => {
+      if (product.id === searchID) {
+        myProduct = product;
+      }
+    });
+    if (myProduct === null) {
+      return console.log('El id', searchID, 'no ha sido hallado');
+    } else {
+      return console.log('El id', searchID, 'corresponde al siguiente al producto ', myProduct.tittle);
+    }
   }
 }
 
-const product1 = new ProductManager(
-  "Mate",
-  "Mate de madera",
-  58,
-  "www.mate.com/img1",
-  "ABC123",
-  12  
-);
+const productList = new ProductManager();
 
-product1.addProduct();
-console.log(product1);
+const product1 = {
+  tittle: "Mate",
+  description: "Mate de madera",
+  price: 58,
+  thumbnail: "www.mate.com/img1",
+  code: 10,
+  stock: 12,
+};
 
+const product2 = {
+  tittle: "Vaso",
+  description: "Vaso de plastico",
+  price: 30,
+  thumbnail: "www.mate.com/img2",
+  code: 10, // repeated code to force duplicated code message
+  stock: 20,
+};
 
+productList.addProduct(product1);
+productList.addProduct(product2);
+
+console.log(productList.getProducts());
+//console.log(productList.getProductById(2));
