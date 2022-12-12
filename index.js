@@ -69,4 +69,4 @@ productList.addProduct(product1);
 productList.addProduct(product2);
 
 console.log(productList.getProducts());
-//console.log(productList.getProductById(2));
+console.log(productList.getProductById(2));
