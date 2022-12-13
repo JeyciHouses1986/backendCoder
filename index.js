@@ -15,10 +15,14 @@ class ProductManager {
   addProduct(product) {
     product = { ...product, id: ProductManager.id };
     let assignedCode = this.products.find(
-      (product) => product.code === this.code
+      (producto) => producto.code === product.code
     );
     if (assignedCode) {
-      return console.log("El producto ya existe");
+      return console.log(
+        "El code del producto ",
+        product.tittle,
+        "debe ser diferente, ya que es idéntico a otro producto"
+      );
     } else {
       this.products.push(product);
       ProductManager.id++;
@@ -38,9 +42,14 @@ class ProductManager {
       }
     });
     if (myProduct === null) {
-      return console.log('El id', searchID, 'no ha sido hallado');
+      return console.log("El ID", searchID, "no ha sido hallado");
     } else {
-      return console.log('El id', searchID, 'corresponde al siguiente al producto ', myProduct.tittle);
+      return console.log(
+        "El ID",
+        searchID,
+        "corresponde al siguiente al producto ",
+        myProduct.tittle
+      );
     }
   }
 }
@@ -65,8 +74,13 @@ const product2 = {
   stock: 20,
 };
 
+console.log("Se procede a la carga de productos: ");
 productList.addProduct(product1);
 productList.addProduct(product2);
 
+console.log("El listado de productos cargados es: ");
 console.log(productList.getProducts());
+
+console.log("Se prodece a buscar el producto con ID=2");
 console.log(productList.getProductById(2));
+console.log("Fin del programa");
