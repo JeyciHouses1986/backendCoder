@@ -83,4 +83,7 @@ console.log(productList.getProducts());
 
 console.log("Se prodece a buscar el producto con ID=2");
 console.log(productList.getProductById(2));
-console.log("Fin del programa");
+
+module.exports = {
+  productManager: productList
+}
